@@ -1,9 +1,11 @@
 const mysql = require("mysql");
 
+let mysqlConnection
+
 if (process.env.JAWSDB_URL !== "production") {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
+  mysqlConnection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
-  let mysqlConnection = mysql.createConnection({
+  mysqlConnection = mysql.createConnection({
     host: "localhost/3000",
     user: "root",
     password: "root",
