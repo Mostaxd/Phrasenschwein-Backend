@@ -1,10 +1,17 @@
 const mysql = require("mysql");
-let mysqlConnection = mysql.createConnection({
-  host: "eu-cdbr-west-03.cleardb.net",
-  user: "b05cce583f228f",
-  password: "1d2b16e6",
-  database: "heroku_cf71d152485e398",
-});
+
+if (process.env.JAWSDB_URL !== "production") {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  let mysqlConnection = mysql.createConnection({
+    host: "localhost/3000",
+    user: "root",
+    password: "root",
+    database: "phrasenschwein",
+  });
+}
+
+const PORT = process.env.PORT || 3000;
 
 mysqlConnection.connect((err) => {
   if (!err) {
@@ -22,18 +29,11 @@ const cors = require("cors");
 
 app.use(bodyParser.json());
 const corsOpts = {
-  origin: '*',
+  origin: "*",
 
-  methods: [
-    'GET',
-    'POST',
-    'PUT',
-    'DELETE',
-  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
 
-  allowedHeaders: [
-    'Content-Type',
-  ],
+  allowedHeaders: ["Content-Type"],
 };
 
 app.use(cors(corsOpts));
@@ -41,9 +41,6 @@ app.use(cors(corsOpts));
 //VIEW ENGINE
 app.set("view engine", "ejs");
 
-
-
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server started on port 3000");
 });
