@@ -2,6 +2,10 @@
   "name": "piggy-app",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "18.12.1",
+    "npm": "9.1.2"
+  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
